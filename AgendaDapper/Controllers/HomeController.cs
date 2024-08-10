@@ -1,26 +1,17 @@
 using AgendaDapper.Models;
+using AgendaDapper.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
 namespace AgendaDapper.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController(IRepository repository) : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
+        private readonly IRepository _repository = repository;
 
         public IActionResult Index()
         {
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
+            return View(_repository.GetClients());
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
