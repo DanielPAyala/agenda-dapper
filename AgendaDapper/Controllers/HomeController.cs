@@ -61,6 +61,18 @@ namespace AgendaDapper.Controllers
             return View(client);
         }
 
+        [HttpGet]
+        public IActionResult Delete(int? id)
+        {
+            var cliente = _repository.GetClient(id.GetValueOrDefault());
+            if (cliente == null)
+            {
+                return NotFound();
+            }
+            _repository.DeleteClient(id.GetValueOrDefault());
+            return RedirectToAction(nameof(Index));
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
