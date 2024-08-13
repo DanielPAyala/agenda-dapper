@@ -1,7 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Dapper.Contrib.Extensions;
 
 namespace AgendaDapper.Models
 {
+    [Table("Cliente")]
     public class Cliente
     {
         [Key]
